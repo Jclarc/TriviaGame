@@ -1,0 +1,24 @@
+body {
+    width:100%;
+    background-image: url(../images/background.jpg);
+}
+.container{
+    background-color: #fff484;
+    height:1000px;
+}
+.subContainer{
+    background-color: #fff484;
+    height:1000px;
+}
+
+.col-md-12 h1{
+    color: #171bcc;
+    text-shadow: 5px 5px 5px #888;
+    font-size:5em;
+}
+#selectionList{
+    font-size:3em;
+}
+#questionTitle{
+    font-size:4em;
+}

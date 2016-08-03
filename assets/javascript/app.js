@@ -24,17 +24,10 @@ var questions = [{
 var currentQuestion = 0;
 var correctAnswers = 0;
 var quizOver = false;
+var j=30;
 
-/*
-function startTimer() {
-    var countdownTimer = setInterval(function() {
-        $(".timer h2").html("Time Remaining: "+j+" Seconds");
-        j = j - 1;
-        if (j < 0) {
-            clearTimeout(countdownTimer);
-        }
-    }, 1000);
-*/
+
+
 
     function displayCurrentQuestion() {
 
@@ -70,11 +63,20 @@ function hideScore() {
 }
 
 
-
+function startTimer() {
+    var countdownTimer = setInterval(function () {
+        $(".timer").html("Time Remaining: " + j + " Seconds");
+        j = j - 1;
+        if (j < 0) {
+            clearTimeout(countdownTimer);
+        }
+    }, 1000);
+}
 
 
 $(document).ready(function () {
     displayCurrentQuestion();
+    startTimer();
     $(this).find(".message").hide();
 
 

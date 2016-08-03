@@ -69,9 +69,18 @@ function startTimer() {
         j = j - 1;
         if (j < 0) {
             clearTimeout(countdownTimer);
+                alert("TIMES UP!");
+            quizOver = false;
+            $(document).find(".nextButton").text("Next Question");
+            resetQuiz();
+            displayCurrentQuestion();
+            hideScore();
+            j=30;
         }
     }, 1000);
 }
+
+
 
 
 $(document).ready(function () {

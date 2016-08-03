@@ -31,8 +31,6 @@ var j=30;
 
     function displayCurrentQuestion() {
 
-    console.log("In display current Question");
-
     var question = questions[currentQuestion].question;
     var questionClass = $(document).find(".container > .question");
     var choiceList = $(document).find(".container > .answers");
@@ -68,7 +66,6 @@ function startTimer() {
         $(".timer").html("Time Remaining: " + j + " Seconds");
         j = j - 1;
         if (j < 0) {
-            clearTimeout(countdownTimer);
                 alert("TIMES UP!");
             quizOver = false;
             $(document).find(".nextButton").text("Next Question");

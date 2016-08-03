@@ -30,7 +30,12 @@
     <div class="nextButton btn btn-danger col-lg-4 col-md-offset-4" type="button">Next</div>
 
     <br>
+    <div class="text-center">
+        <button class="btn btn-warning btn-xs themeButton"><span class="glyphicon glyphicon-music"></span> Play Theme!</button>
+        <button class="btn btn-default btn-xs pauseButton"><span class="glyphicon glyphicon-pause"></span> Pause Song</button>
+    </div>
 </div>
+
 
 
 </div>
@@ -71,7 +76,7 @@
 
     <script type="text/javascript" src="assets/javascript/app.js"></script>
     <script type="text/javascript">
-/*
+
         //audio for theme song
         var audioElement = document.createElement('audio');
         audioElement.setAttribute('src', 'assets/audio/themeSong.mp3');
@@ -82,7 +87,7 @@
         $(".pauseButton").on("click", function(){
             audioElement.pause();
         });
-        */
+
     </script>
 </body>
 

@@ -28,7 +28,7 @@ var j=30;
 
 
 
-
+//functions--------------------------------------------------------------------------------------------------
     function displayCurrentQuestion() {
 
     var question = questions[currentQuestion].question;
@@ -76,10 +76,10 @@ function startTimer() {
         }
     }, 1000);
 }
+//end functions*******************************************************************************************************
 
 
-
-
+//game-------------------------------------------------------------------
 $(document).ready(function () {
     displayCurrentQuestion();
     startTimer();

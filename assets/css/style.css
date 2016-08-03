@@ -1,6 +1,7 @@
 body {
     width:100%;
     background-image: url(../images/background.jpg);
+    font-size:3em;
 }
 .container{
     background-color: #fff484;
@@ -21,4 +22,10 @@ body {
 }
 #questionTitle{
     font-size:4em;
+}
+ul{
+    list-style: none
+}
+h1{
+    font-size: 2em;
 }

@@ -1,100 +1,115 @@
 
-var questionBank = [{
-        question: 'question1?',
-        choices: ['a1', 'a2', 'a3', 'a4'],
-        correctAnswer: 2
-    },
-    {
-        question: 'question2?',
-        choices: ['a1', 'a2', 'a3', 'a4'],
-        correctAnswer: 2
-    },
-    {
-        question: 'question3?',
-        choices: ['a1', 'a2', 'a3', 'a4'],
-        correctAnswer: 3
-    },
-    {
-        question: 'question4?',
-        choices: ['a1', 'a2', 'a3', 'a4'],
-        correctAnswer: 1
-    },
-    {
-        question: 'question5?',
-        choices: ['a1', 'a2', 'a3', 'a4'],
-        correctAnswer: 1
-    }];
+var questions = [{
+    question: "Which of the following is a subset of  {b, c, d}?",
+    choices: ["{}", "{a}", "{1,2,3}", "{a,b,c}"],
+    correctAnswer:0
+}, {
+    question: "The value of 5 in the number  357.21 is ?",
+    choices: ["tenths", "ones", "tens", "hundreds"],
+    correctAnswer: 2
+}, {
+    question: "3 4/5 expressed as a decimal is ?",
+    choices: ["3.40", "3.45", "3.50", "3.80"],
+    correctAnswer: 3
+}, {
+    question: "Which of the following is the Highest Common Factor of 18, 24 and 36?",
+    choices: ["6", "18", "36", "72"],
+    correctAnswer: 0
+}, {
+    question: "How many subsets does the set {a, b, c, d, e} have?",
+    choices: ["2", "5", "10", "32"],
+    correctAnswer: 3
+}];
 
+var currentQuestion = 0;
+var correctAnswers = 0;
+var quizOver = false;
 
+/*
+function startTimer() {
+    var countdownTimer = setInterval(function() {
+        $(".timer h2").html("Time Remaining: "+j+" Seconds");
+        j = j - 1;
+        if (j < 0) {
+            clearTimeout(countdownTimer);
+        }
+    }, 1000);
+*/
 
+    function displayCurrentQuestion() {
 
-var questionTitle = document.getElementById('questionTitle');
-var selectionList = document.getElementById('selectionList');
-var nextButton = document.getElementById('nextButton');
-var startButton= document.getElementById('startButton');
-var i = 0;
-var j = 30;
+    console.log("In display current Question");
 
+    var question = questions[currentQuestion].question;
+    var questionClass = $(document).find(".container > .question");
+    var choiceList = $(document).find(".container > .answers");
+    var numChoices = questions[currentQuestion].choices.length;
+    $(questionClass).text(question);
+    $(choiceList).find("li").remove();
 
-
-
-
-var start=false;
-$(".container").hide();
-startButton.onclick=function(){
-    if (start=true){
-        startTimer();
-        $(".startContainer").hide();
-        $(".container").show();
-
+    var choice;
+    for (i = 0; i < numChoices; i++) {
+        choice = questions[currentQuestion].choices[i];
+        $('<li><input type="radio" value=' + i + ' name="dynradio" />' + choice + '</li>').appendTo(choiceList);
     }
+}
 
-    //timer function
-    function startTimer() {
-        var countdownTimer = setInterval(function() {
-            $(".timer h2").html("Time Remaining: "+j+" Seconds");
-            j = j - 1;
-            if (j < 0) {
-                clearTimeout(countdownTimer);
+function resetQuiz() {
+    currentQuestion = 0;
+    correctAnswers = 0;
+    hideScore();
+}
+
+function displayScore() {
+    $(document).find(".container > .result").text("You scored: " + correctAnswers + " out of: " + questions.length);
+    $(document).find(".container > .result").show();
+}
+
+function hideScore() {
+    $(document).find(".result").hide();
+}
+
+
+
+
+
+$(document).ready(function () {
+    displayCurrentQuestion();
+    $(this).find(".message").hide();
+
+
+    $(this).find(".nextButton").on("click", function () {
+        if (!quizOver) {
+
+            var value = $("input[type='radio']:checked").val();
+
+            if (value == undefined) {
+                $(document).find(".message").text("Please select an answer");
+                $(document).find(".message").show();
+            } else {
+                $(document).find(".message").hide();
+
+                if (value == questions[currentQuestion].correctAnswer) {
+                    correctAnswers++;
+                }
+
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    displayCurrentQuestion();
+                } else {
+                    displayScore();
+                    $(document).find(".nextButton").text("Play Again?");
+                    quizOver = true;
+                }
             }
-        }, 1000);
-
-
-        nextButton.onclick = function() {
-            if(i>questionBank.length -1){
-                i=0;
-            }
-            populateQuestion(i);
-            i++;
-        };
-
-
-        //writes questions to html
-        function populateQuestion(num) {
-            var individualQuestion = questionBank[i];
-            questionTitle.innerText = individualQuestion.question;
-            selectionList.innerHTML = ""; //reset choices list
-            for(var key in individualQuestion.choices){
-                var radioBtnName = "question"+i+"_choice";
-                var choiceText = individualQuestion.choices[key];
-                selectionList.appendChild(createList(radioBtnName,choiceText));
-            }
+        } else {//reset
+            quizOver = false;
+            $(document).find(".nextButton").text("Next Question");
+            resetQuiz();
+            displayCurrentQuestion();
+            hideScore();
         }
+    });
 
-        //creates list for answers
-        function createList(name, choiceText) {
-            var e = document.createElement('div');
-            var answerBtn = '<input type="radio" name="' + name + '"';
-            answerBtn += '/>'+choiceText;
-            e.innerHTML = answerBtn;
-            return e;
-        }
-
-
-            }
-
-} //end start function
-
-
-
+});
 
